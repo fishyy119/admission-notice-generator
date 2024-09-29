@@ -4,11 +4,40 @@
 </head>
 <body>
   <style>
-    .input-area input {
+
+    .input-area {
+      display: flex;
+      flex-direction: column; /* 纵向排列每组 */
+    }
+
+    .input-group {
+      display: flex; /* 水平排列输入框 */
+      margin-bottom: 16px; /* 每组之间的间距 */
+    }
+
+    .input-group input {
+      margin-right: 8px; /* 输入框之间的间距 */
       width: 100%;
       margin: 4px 2px;
       padding: 4px 4px;
       font-size: larger;
+    }
+
+    .input-group input:last-child {
+      margin-right: 0; /* 最后一个输入框不需要右边距 */
+    }
+
+    .input-1-3 {
+      flex: 0 0 33.33%; /* 占1/3宽度 */
+      margin-right: 8px; /* 输入框之间的间距 */
+    }
+
+    .input-1-3:last-child {
+      margin-right: 0; /* 最后一个输入框不需要右边距 */
+    }
+
+    .input-2-3 {
+      flex: 0 0 66.67%; /* 占2/3宽度 */
     }
 
     .input-area p {
@@ -574,28 +603,28 @@
     <div class="ui-box"
       style="border-top: 1px solid rgb(204, 204, 204); border-right: 1px solid rgb(204, 204, 204); border-bottom: none; border-left: 1px solid rgb(204, 204, 204); border-image: initial; margin-bottom: 16px;">
       <div class="ui-box-head" style="background: rgb(249, 249, 249); padding-left: 10px; padding-right: 10px;">
-        <h3 class="ui-box-head-title zy-title" style="font-size: 14px; color: rgb(80, 170, 194);">志愿信息</h3>
+        <h3 class="ui-box-head-title zy-title" style="font-size: 14px; color: rgb(80, 170, 194);">{{text_1}}</h3>
       </div>
       <div class="ui-box-container" style="border-bottom: 1px solid rgb(204, 204, 204);">
         <div class="ui-box-content">
           <dl id="ui-dlist" class="ui-dlist">
-            <dt class="ui-dlist-tit">层次：</dt>
+            <dt class="ui-dlist-tit">{{level_title}}：</dt>
             <dd class="ui-dlist-det"> {{level}}</dd>
-            <dt class="ui-dlist-tit">单位：</dt>
+            <dt class="ui-dlist-tit">{{unit_title}}：</dt>
             <dd class="ui-dlist-det"> {{unit}}</dd>
-            <dt class="ui-dlist-tit">院系：</dt>
+            <dt class="ui-dlist-tit">{{school_title}}：</dt>
             <dd class="ui-dlist-det"> {{school}}</dd>
-            <dt class="ui-dlist-tit">专业：</dt>
+            <dt class="ui-dlist-tit">{{major_title}}：</dt>
             <dd class="ui-dlist-det">{{major}}</dd>
-            <dt class="ui-dlist-tit">学习方式：</dt>
+            <dt class="ui-dlist-tit">{{type_title}}：</dt>
             <dd class="ui-dlist-det">{{type}}</dd>
-            <dt class="ui-dlist-tit">研究方向：</dt>
+            <dt class="ui-dlist-tit">{{research_direction_title}}：</dt>
             <dd class="ui-dlist-det">{{research_direction}}</dd>
-            <dt class="ui-dlist-tit">导师：</dt>
+            <dt class="ui-dlist-tit">{{tutor_title}}：</dt>
             <dd class="ui-dlist-det">{{tutor}}</dd>
-            <dt class="ui-dlist-tit">专项计划类型：</dt>
+            <dt class="ui-dlist-tit">{{special_plan_type_title}}：</dt>
             <dd class="ui-dlist-det">{{special_plan_type}}</dd>
-            <dt class="ui-dlist-tit">就业类型：</dt>
+            <dt class="ui-dlist-tit">{{employment_type_title}}：</dt>
             <dd class="ui-dlist-det">{{employment_type}}</dd>
           </dl>
           <div style="clear: both; font-size: 0px; line-height: 0;"></div>
@@ -603,91 +632,162 @@
       </div>
       <div class="ui-box-head" style="background: rgb(249, 249, 249); padding-left: 10px; padding-right: 10px;">
         <h3 class="ui-box-head-title" style="font-size: 14px; color: rgb(204, 153, 0);">
-          待录取通知
+          {{text_2}}
         </h3> <span class="ui-box-head-text">
-          接受或拒绝待录取通知后，将无法更改。
+          {{text_3}}
         </span>
       </div>
       <div class="ui-box-container" style="border-bottom: 1px solid rgb(204, 204, 204);">
         <div class="ui-box-content">
-          <p style="color: #848484;"> {{unit}} 招生办 {{send_time}}</p>
+          <p style="color: #848484;"> {{unit}} {{sign}} {{send_time}}</p>
           <div class="ui-tiptext-container ui-tiptext-container-message">
             <div class="ui-tiptext-arrow ui-tiptext-arrowup"><em>◆</em> <span>◆</span></div>
             <p class="ui-tiptext ui-tiptext-message">{{notation_text}} </p>
             <p style="margin: 10px; text-align: center;">
               <span class="ui-button ui-button-ldisable" style="color:#007f00; border: 1px solid #ccc;">
                 <i title="接受" class="ui-tiptext-icon iconfont">{{picked}}</i> 
-                <span class="result">您于{{accept_time}}接受了{{unit}}的待录取通知</span>
+                <span class="result">您于{{accept_time}}接受了{{unit}}的{{text_2}}</span>
               </span></p>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- 常规的录取信息更改 -->
     <div class="input-area">
       <p>请在下方输入自定义内容：</p>
-      <label for="level">层次:</label>
-      <input id="level" v-model="level">
       
-      <label for="unit">单位:</label>
-      <input id="unit" v-model="unit">
+      <div class="input-group">
+        <input id="level_title" v-model="level_title" placeholder="层次" class="input-1-3">
+        <input id="level" v-model="level" placeholder="硕士" class="input-2-3">
+      </div>
       
-      <label for="school">院系:</label>
-      <input id="school" v-model="school">
+      <div class="input-group">
+        <input id="unit_title" v-model="unit_title" placeholder="单位" class="input-1-3">
+        <input id="unit" v-model="unit" placeholder="家里蹲大学" class="input-2-3">
+      </div>
       
-      <label for="major">专业:</label>
-      <input id="major" v-model="major">
+      <div class="input-group">
+        <input id="school_title" v-model="school_title" placeholder="院系" class="input-1-3">
+        <input id="school" v-model="school" placeholder="炸鸡学院" class="input-2-3">
+      </div>
       
-      <label for="type">学习方式:</label>
-      <input id="type" v-model="type">
+      <div class="input-group">
+        <input id="major_title" v-model="major_title" placeholder="专业" class="input-1-3">
+        <input id="major" v-model="major" placeholder="星期四v50科学与技术" class="input-2-3">
+      </div>
       
-      <label for="research_direction">研究方向:</label>
-      <input id="research_direction" v-model="research_direction">
+      <div class="input-group">
+        <input id="type_title" v-model="type_title" placeholder="学习方式" class="input-1-3">
+        <input id="type" v-model="type" placeholder="全日制" class="input-2-3">
+      </div>
       
-      <label for="tutor">导师:</label>
-      <input id="tutor" v-model="tutor">
+      <div class="input-group">
+        <input id="research_direction_title" v-model="research_direction_title" placeholder="研究方向" class="input-1-3">
+        <input id="research_direction" v-model="research_direction" placeholder="不区分研究方向" class="input-2-3">
+      </div>
+
+      <div class="input-group">
+        <input id="tutor_title" v-model="tutor_title" placeholder="导师" class="input-1-3">
+        <input id="tutor" v-model="tutor" placeholder="不区分导师" class="input-2-3">
+      </div>
+
+      <div class="input-group">
+        <input id="special_plan_type_title" v-model="special_plan_type_title" placeholder="专项计划类型" class="input-1-3">
+        <input id="special_plan_type" v-model="special_plan_type" placeholder="普通计划" class="input-2-3">
+      </div>
+
+      <div class="input-group">
+        <input id="employment_type_title" v-model="employment_type_title" placeholder="就业类型" class="input-1-3">
+        <input id="employment_type" v-model="employment_type" placeholder="非定向就业" class="input-2-3">
+      </div>
       
-      <label for="special_plan_type">专项计划类型:</label>
-      <input id="special_plan_type" v-model="special_plan_type">
-      
-      <label for="employment_type">就业类型:</label>
-      <input id="employment_type" v-model="employment_type">
-      
-      <label for="send_time">发送时间:</label>
-      <input id="send_time" v-model="send_time">
-      
-      <label for="accept_time">接受时间:</label>
-      <input id="accept_time" v-model="accept_time">
-      
-      <label for="notation_text">通知内容:</label>
-      <input id="notation_text" v-model="notation_text">
-    </div>
-    
-      <div>
-        <input type="radio" id="yes" value="&#xF049;" v-model="picked" onclick="$('.result')[0].innerHTML=$('.result')[0].innerText.replace('拒绝', '接受');$('.ui-button')[0].style.color='#007F00'">
+      <div class="input-group">
+        <label for="send_time">发送时间</label>
+        <input id="send_time" v-model="send_time" placeholder="2024-09-29 10:48">
+      </div>
+
+      <div class="input-group">
+        <label for="accept_time">接受时间</label>
+        <input id="accept_time" v-model="accept_time" placeholder="9月29日 10:49">
+      </div>
+
+      <div class="input-group">
+        <label for="notation_text">录取信息</label>
+        <input id="notation_text" v-model="notation_text" placeholder="通知内容">
+      </div>
+
+      <div class="input-group">
+        <input class="input-1-3" type="radio" id="yes" value="&#xF049;" v-model="picked" onclick="$('.result')[0].innerHTML=$('.result')[0].innerText.replace('拒绝', '接受');$('.ui-button')[0].style.color='#007F00'">
         <label for="yes">接受</label>
         <br>
-        <input type="radio" id="no" value="&#xF045;" v-model="picked" onclick="$('.result')[0].innerHTML=$('.result')[0].innerText.replace('接受', '拒绝');$('.ui-button')[0].style.color='#FF0000'">
+        <input class="input-1-3" type="radio" id="no" value="&#xF045;" v-model="picked" onclick="$('.result')[0].innerHTML=$('.result')[0].innerText.replace('接受', '拒绝');$('.ui-button')[0].style.color='#FF0000'">
         <label for="no">拒绝</label>
         <br>
       </div>
   </div>
+
+  <!-- 边边角角处的信息 -->
+  <div class="input-area">
+    <p>各种角落处的文本：</p>
+    
+    <div class="input-group">
+      <input id="text_1" v-model="text_1" placeholder="志愿信息">
+    </div>
+
+    <div class="input-group">
+      <input id="text_2" v-model="text_2" placeholder="待录取通知">
+    </div>
+
+    <div class="input-group">
+      <input id="text_3" v-model="text_3" placeholder="接受或拒绝待录取通知后，将无法更改。">
+    </div>
+    
+    <div class="input-group">
+      <input id="sign" v-model="sign" placeholder="招生办">
+    </div>
+  </div>
+
   <script>
     let app = new Vue({
       el: "#app",
       data: {
+        level_title: "层次",
         level: "硕士",
+
+        unit_title: "单位",
         unit: "Minecraft大学",
+
+        school_title: "院系",
         school: "生存学院",
+
+        major_title: "专业",
         major: "生存原理与特性应用技术",
+
+        type_title: "学习方式",
         type: "全日制",
+
+        research_direction_title: "研究方向",
         research_direction: "地形破坏与改造",
+
+        tutor_title: "导师",
         tutor: "不区分导师",
+
+        special_plan_type_title: "专项计划类型",
         special_plan_type: "普通计划",
+
+        employment_type_title: "就业类型",
         employment_type: "非定向就业",
+
         send_time: "2024-09-29 10:48",
         accept_time: "9月29日 10:49",
         notation_text: "移除了Herobrine。",
-        picked: ""
+        picked: "",
+
+        text_1: "志愿信息",
+        text_2: "待录取通知",
+        text_3: "接受或拒绝待录取通知后，将无法更改。",
+        sign: "招生办"
       }
     })
   </script>
