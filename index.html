@@ -77,7 +77,7 @@
 
     .ui-box {
       zoom: 1;
-      font-size: 12px;
+      font-size: 14px;
       margin: 0;
       padding: 0;
       border-bottom: 0;
@@ -160,7 +160,7 @@
       text-shadow: 0 1px 2px #EEEEEE;
     }
 
-    .ui-dlist {
+    /* .ui-dlist {
       display: inline-block;
       color: gray;
       font-size: 12px;
@@ -180,6 +180,28 @@
       width: 60%;
       text-align: left;
       margin: 0
+    } */
+
+    .ui-dlist {
+        display: inline-block;
+        color: #65696E;
+        font-size: 14px;
+        line-height: 2.2
+    }
+
+    .ui-dlist-tit {
+        float: left;
+        text-align: right;
+        margin: 0;
+        width: 40%
+    }
+
+    .ui-dlist-det {
+        float: left;
+        text-align: left;
+        margin: 0;
+        color: #2B2E33;
+        width:60%
     }
 
     .ui-dlist-tit .iconfont {
@@ -193,8 +215,7 @@
 
     .ui-dlist-det .ui-list {
       padding: 10px 10px 10px 25px;
-    }
-
+    } 
 
     .ui-tiptext-container-message {
       margin: 10px 25px 20px 25px;
@@ -204,7 +225,7 @@
       margin: 0;
       color: #4D4D4D;
       position: relative;
-      font-size: 12px;
+      font-size: 14px;
       zoom: 1
     }
 
@@ -412,7 +433,7 @@
       cursor: pointer
     }
 
-    .ui-button * {
+    /* .ui-button * {
       margin: 0;
       padding: 0
     }
@@ -431,12 +452,16 @@
       padding: 0 20px;
       *zoom: 1;
       *overflow: visible;
-      background-image: none
+      background-image: none;
+      background-color: #fff;
+      border-color: #dcdee2
     }
 
     .ui-button:hover {
       text-decoration: none;
-      background-image: none
+      background-image: none;
+      border-color: #6AB6CB;
+      color: #6AB6CB
     }
 
     input.ui-button-text,
@@ -447,7 +472,9 @@
     .ui-button:active {
       position: relative;
       top: 1px;
-      box-shadow: 1px 1px 3px #999 inset
+      box-shadow: 1px 1px 3px #999 inset;
+      border-color: #4798AE;
+      color: #4798AE;
     }
 
     .ui-button-ldisable,
@@ -469,6 +496,7 @@
     a.ui-button-mdisable:hover,
     a.ui-button-sdisable:hover {
       color: #999
+      box-shadow: none
     }
 
     .ui-button-ldisable {
@@ -488,7 +516,57 @@
       position: static;
       top: 0;
       box-shadow: none
+    } */
+
+    .ui-button * {
+        margin: 0;
+        padding: 0
     }
+
+    .ui-button {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        font-size: 14px;
+        font-family: inherit;
+        border-radius: 4px;
+        padding: 0 15px;
+        background-image: none;
+        background-color: #fff;
+        border-color: #dcdee2
+    }
+
+    .ui-button:hover {
+        text-decoration: none;
+        border-color: #6AB6CB;
+        color: #6AB6CB
+    }
+
+    .ui-button:active {
+        border-color: #4798AE;
+        color: #4798AE
+    }
+
+    .ui-button-ldisable {
+        background: #f2f3f5;
+        cursor: not-allowed;
+        pointer-events: none
+    }
+
+    .ui-button-ldisable {
+        line-height: 30px;
+        height: 32px
+    }
+
+    .ui-button-ldisable:active,
+    .ui-button-mdisable:active,
+    .ui-button-sdisable:active {
+        position: static;
+        top: 0;
+        box-shadow: none
+    }
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -537,7 +615,7 @@
             <div class="ui-tiptext-arrow ui-tiptext-arrowup"><em>◆</em> <span>◆</span></div>
             <p class="ui-tiptext ui-tiptext-message">{{notation_text}} </p>
             <p style="margin: 10px; text-align: center;">
-              <span class="ui-button ui-button-ldisable" style="color:#007f00; border: 1px solid rgb(204, 204, 204);">
+              <span class="ui-button ui-button-ldisable" style="color:#007f00; border: 1px solid #ccc;">
                 <i title="接受" class="ui-tiptext-icon iconfont">{{picked}}</i> 
                 <span class="result">您于{{accept_time}}接受了{{unit}}的待录取通知</span>
               </span></p>
@@ -573,18 +651,18 @@
     let app = new Vue({
       el: "#app",
       data: {
-        level: "直博生",
-        unit: "蓝翔高级技工学校",
-        school: "工程机械学院",
-        major: "工程机械技师培训（四年制）",
+        level: "硕士",
+        unit: "Minecraft大学",
+        school: "生存学院",
+        major: "生存原理与特性应用技术",
         type: "全日制",
-        research_direction: "挖掘机构造与维修",
-        tutor: "唐国强",
-        special_plan_type: "非专项计划",
+        research_direction: "地形破坏与改造",
+        tutor: "不区分导师",
+        special_plan_type: "普通计划",
         employment_type: "非定向就业",
-        send_time: "2020-10-13 9:34",
-        accept_time: "10月13日 9:36",
-        notation_text: "考生你好！非常高兴的通知你，蓝翔高级技工学校工程机械学院同意拟录取你为我院2021级直博生，请第一时间确定。祝贺你！",
+        send_time: "2024-09-29 10:48",
+        accept_time: "9月29日 10:49",
+        notation_text: "移除了Herobrine。",
         picked: ""
       }
     })
