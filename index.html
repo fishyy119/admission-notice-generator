@@ -625,19 +625,43 @@
     </div>
     <div class="input-area">
       <p>请在下方输入自定义内容：</p>
-      <input v-model="level">
-      <input v-model="unit">
-      <input v-model="school">
-      <input v-model="major">
-      <input v-model="type">
-      <input v-model="research_direction">
-      <input v-model="tutor">
-      <input v-model="special_plan_type">
-      <input v-model="employment_type">
-      <input v-model="send_time">
-      <input v-model="accept_time">
-      <input v-model="notation_text">
+      <label for="level">层次:</label>
+      <input id="level" v-model="level">
+      
+      <label for="unit">单位:</label>
+      <input id="unit" v-model="unit">
+      
+      <label for="school">院系:</label>
+      <input id="school" v-model="school">
+      
+      <label for="major">专业:</label>
+      <input id="major" v-model="major">
+      
+      <label for="type">学习方式:</label>
+      <input id="type" v-model="type">
+      
+      <label for="research_direction">研究方向:</label>
+      <input id="research_direction" v-model="research_direction">
+      
+      <label for="tutor">导师:</label>
+      <input id="tutor" v-model="tutor">
+      
+      <label for="special_plan_type">专项计划类型:</label>
+      <input id="special_plan_type" v-model="special_plan_type">
+      
+      <label for="employment_type">就业类型:</label>
+      <input id="employment_type" v-model="employment_type">
+      
+      <label for="send_time">发送时间:</label>
+      <input id="send_time" v-model="send_time">
+      
+      <label for="accept_time">接受时间:</label>
+      <input id="accept_time" v-model="accept_time">
+      
+      <label for="notation_text">通知内容:</label>
+      <input id="notation_text" v-model="notation_text">
     </div>
+    
       <div>
         <input type="radio" id="yes" value="&#xF049;" v-model="picked" onclick="$('.result')[0].innerHTML=$('.result')[0].innerText.replace('拒绝', '接受');$('.ui-button')[0].style.color='#007F00'">
         <label for="yes">接受</label>
